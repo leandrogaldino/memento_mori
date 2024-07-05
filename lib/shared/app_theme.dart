@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 final class AppTheme {
+  static const backgroudColor = Color.fromARGB(255, 230, 230, 230);
   static const primaryColor = Color.fromARGB(255, 153, 0, 0);
   static const secondaryColor = Color.fromARGB(255, 255, 200, 200);
-  static const terciaryColor = Color.fromARGB(255, 51, 51, 51);
+  static const textColor = Color.fromARGB(255, 51, 51, 51);
   static const outlineColor = Color.fromARGB(255, 235, 235, 235);
 
   static final _defaultInputBorder = OutlineInputBorder(
@@ -15,7 +16,7 @@ final class AppTheme {
     colorScheme: ColorScheme.fromSeed(seedColor: secondaryColor),
     useMaterial3: true,
     fontFamily: 'Raleway',
-    scaffoldBackgroundColor: primaryColor,
+    scaffoldBackgroundColor: backgroudColor,
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
       fillColor: secondaryColor,
@@ -25,7 +26,7 @@ final class AppTheme {
         fontWeight: FontWeight.w700,
       ),
       floatingLabelStyle: const TextStyle(
-        color: terciaryColor,
+        color: textColor,
         fontWeight: FontWeight.w600,
       ),
       enabledBorder: _defaultInputBorder,
@@ -37,7 +38,7 @@ final class AppTheme {
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
           foregroundColor: Colors.white,
-          backgroundColor: terciaryColor,
+          backgroundColor: textColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
@@ -52,20 +53,20 @@ final class AppTheme {
   static final darkTheme = lightTheme;
 
   static const titleStyle = TextStyle(
-    color: terciaryColor,
+    color: textColor,
     fontSize: 32,
     fontWeight: FontWeight.w900,
     fontFamily: 'Raleway',
   );
   static const titleSmallStyle = TextStyle(
-    color: terciaryColor,
+    color: textColor,
     fontSize: 24,
     fontWeight: FontWeight.w900,
     fontFamily: 'Raleway',
   );
 
   static const subTitleStyle = TextStyle(
-    color: terciaryColor,
+    color: textColor,
     fontSize: 18,
     fontWeight: FontWeight.w500,
     fontFamily: 'Raleway',

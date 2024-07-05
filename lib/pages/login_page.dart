@@ -35,14 +35,14 @@ class _LoginPageState extends State<LoginPage> {
               padding: const EdgeInsets.all(40),
               constraints: BoxConstraints(maxWidth: screenSize.width * 0.8),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: AppTheme.primaryColor,
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Form(
                 key: formKey,
                 child: Column(
                   children: [
-                    const Text('Login', style: AppTheme.titleStyle),
+                    Text('Login', style: AppTheme.titleStyle.copyWith(color: Colors.white)),
                     const SizedBox(height: 32),
                     TextFormField(
                       controller: documentEC,
