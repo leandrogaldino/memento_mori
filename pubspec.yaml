@@ -70,9 +70,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+assets:
+  - assets/images/heart.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -88,49 +87,49 @@ flutter:
 fonts:
     - family: Raleway
       fonts:
-        - asset: assets/font/Raleway-Thin.ttf
+        - asset: assets/fonts/Raleway-Thin.ttf
           weight: 100
-        - asset: assets/font/Raleway-ThinItalic.ttf
+        - asset: assets/fonts/Raleway-ThinItalic.ttf
           weight: 100
           style: italic
-        - asset: assets/font/Raleway-ExtraLight.ttf
+        - asset: assets/fonts/Raleway-ExtraLight.ttf
           weight: 200
-        - asset: assets/font/Raleway-ExtraLightItalic.ttf
+        - asset: assets/fonts/Raleway-ExtraLightItalic.ttf
           weight: 200
           style: italic
-        - asset: assets/font/Raleway-Light.ttf
+        - asset: assets/fonts/Raleway-Light.ttf
           weight: 300
-        - asset: assets/font/Raleway-LightItalic.ttf
+        - asset: assets/fonts/Raleway-LightItalic.ttf
           weight: 300
           style: italic
-        - asset: assets/font/Raleway-Regular.ttf
+        - asset: assets/fonts/Raleway-Regular.ttf
           weight: 400
-        - asset: assets/font/Raleway-RegularItalic.ttf
+        - asset: assets/fonts/Raleway-RegularItalic.ttf
           weight: 400
           style: italic
-        - asset: assets/font/Raleway-Medium.ttf
+        - asset: assets/fonts/Raleway-Medium.ttf
           weight: 500
-        - asset: assets/font/Raleway-MediumItalic.ttf
+        - asset: assets/fonts/Raleway-MediumItalic.ttf
           weight: 500
           style: italic
-        - asset: assets/font/Raleway-SemiBold.ttf
+        - asset: assets/fonts/Raleway-SemiBold.ttf
           weight: 600
-        - asset: assets/font/Raleway-SemiBoldItalic.ttf
+        - asset: assets/fonts/Raleway-SemiBoldItalic.ttf
           weight: 600
           style: italic
-        - asset: assets/font/Raleway-Bold.ttf
+        - asset: assets/fonts/Raleway-Bold.ttf
           weight: 700
-        - asset: assets/font/Raleway-BoldItalic.ttf
+        - asset: assets/fonts/Raleway-BoldItalic.ttf
           weight: 700
           style: italic
-        - asset: assets/font/Raleway-ExtraBold.ttf
+        - asset: assets/fonts/Raleway-ExtraBold.ttf
           weight: 800
-        - asset: assets/font/Raleway-ExtraBoldItalic.ttf
+        - asset: assets/fonts/Raleway-ExtraBoldItalic.ttf
           weight: 800
           style: italic
-        - asset: assets/font/Raleway-Black.ttf
+        - asset: assets/fonts/Raleway-Black.ttf
           weight: 900
-        - asset: assets/font/Raleway-BlackItalic.ttf
+        - asset: assets/fonts/Raleway-BlackItalic.ttf
           weight: 900
           style: italic
 
