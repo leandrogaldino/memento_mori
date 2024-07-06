@@ -1,7 +1,7 @@
-import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:memento_mori/interfaces/auth.dart';
 import 'package:memento_mori/models/user_model.dart';
+import 'package:memento_mori/shared/exceptions/auth_exception.dart';
 
 class FirebaseAuthService implements Auth {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -14,19 +14,17 @@ class FirebaseAuthService implements Auth {
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
         case 'invalid-email':
-          log('E-mail inválido');
+          throw AuthException(message: 'E-Mail inválido');
         case 'invalid-credential':
-          log('Senha inválida');
+          throw AuthException(message: 'Senha inválida');
         case 'too-many-requests':
-          log('excedido o número de requisições');
+          throw AuthException(message: 'O número máximo de requisições foi excedido, aguarde alguns minuitos e tente novamente.');
         case 'user-disabled':
-          log('usuário desabilitado');
-          break;
+          throw AuthException(message: 'Usuário desativado');
         default:
+          throw AuthException(message: 'Erro: ${e.code}');
       }
-      rethrow;
-    } on Exception catch (e) {
-      log('erro ao entrar: $e');
+    } on Exception {
       rethrow;
     }
   }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:memento_mori/pages/home_page.dart';
 import 'package:memento_mori/pages/login_page.dart';
-import 'package:memento_mori/pages/splash_page.dart';
 import 'package:memento_mori/shared/app_theme.dart';
+import 'package:memento_mori/shared/auth_state_listener.dart';
 import 'package:memento_mori/shared/routes.dart';
 
 class App extends StatelessWidget {
@@ -10,12 +10,11 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Memento Mori',
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      initialRoute: Routes.splash,
+      home: const AuthStateListener(),
       routes: {
-        Routes.splash: (context) => const SplashPage(),
         Routes.home: (context) => const HomePage(),
         Routes.login: (context) => const LoginPage(),
       },

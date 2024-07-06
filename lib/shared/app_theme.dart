@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 
 final class AppTheme {
-  static const backgroudColor = Color.fromARGB(255, 230, 230, 230);
-  static const primaryColor = Color.fromARGB(255, 153, 0, 0);
-  static const secondaryColor = Color.fromARGB(255, 255, 200, 200);
-  static const textColor = Color.fromARGB(255, 51, 51, 51);
-  static const outlineColor = Color.fromARGB(255, 235, 235, 235);
+  static const backgroudColor = Color.fromARGB(255, 240, 240, 240);
+  static const primaryColor = Color.fromARGB(255, 110, 0, 0);
+  static const secondaryColor = Color.fromARGB(255, 255, 255, 255);
+  static const textColor = Color.fromARGB(255, 50, 50, 50);
+  static const outlineColor = Color.fromARGB(255, 220, 220, 220);
+  static const gradientColor = [Color.fromARGB(255, 180, 0, 0), Color.fromARGB(255, 110, 0, 0)];
 
   static final _defaultInputBorder = OutlineInputBorder(
     borderRadius: BorderRadius.circular(16),
     borderSide: const BorderSide(color: outlineColor),
+  );
+  static final _errorInputBorder = _defaultInputBorder.copyWith(
+    borderSide: const BorderSide(color: Colors.red),
   );
 
   static final lightTheme = ThemeData(
@@ -31,14 +35,13 @@ final class AppTheme {
       ),
       enabledBorder: _defaultInputBorder,
       focusedBorder: _defaultInputBorder,
-      errorBorder: _defaultInputBorder.copyWith(
-        borderSide: const BorderSide(color: Colors.red),
-      ),
+      errorBorder: _errorInputBorder,
+      focusedErrorBorder: _errorInputBorder,
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-          foregroundColor: Colors.white,
-          backgroundColor: textColor,
+          foregroundColor: textColor,
+          backgroundColor: primaryColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),

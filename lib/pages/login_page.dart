@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:memento_mori/controllers/login_controller.dart';
 import 'package:memento_mori/services/firebase_auth_service.dart';
-import 'package:memento_mori/services/firebase_firestore_service.dart';
 import 'package:memento_mori/shared/app_theme.dart';
+import 'package:memento_mori/shared/messages.dart';
 import 'package:validatorless/validatorless.dart';
 
 class LoginPage extends StatefulWidget {
@@ -11,83 +12,110 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends State<LoginPage> with MessageViewMixin {
   final formKey = GlobalKey<FormState>();
-  final documentEC = TextEditingController();
-  final accessCodeEC = TextEditingController();
+  final emailEC = TextEditingController();
+  final passwordEC = TextEditingController();
+  final controller = LoginController();
+
+  @override
+  void initState() {
+    messageListener(controller);
+    super.initState();
+  }
 
   @override
   void dispose() {
-    documentEC.dispose();
-    accessCodeEC.dispose();
+    emailEC.dispose();
+    passwordEC.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.sizeOf(context);
+    final isPortrait = screenSize.height > screenSize.width;
+    final containerSize = isPortrait ? screenSize.width * 0.3 : screenSize.height * 0.3;
+
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          constraints: BoxConstraints(minHeight: screenSize.height),
-          child: Center(
-            child: Container(
-              padding: const EdgeInsets.all(40),
-              constraints: BoxConstraints(maxWidth: screenSize.width * 0.8),
-              decoration: BoxDecoration(
-                color: AppTheme.primaryColor,
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: Form(
-                key: formKey,
-                child: Column(
-                  children: [
-                    Text('Login', style: AppTheme.titleStyle.copyWith(color: Colors.white)),
-                    const SizedBox(height: 32),
-                    TextFormField(
-                      controller: documentEC,
-                      validator: Validatorless.multiple([
-                        Validatorless.required('CPF obrigatório'),
-                        Validatorless.cpf('CPF inválido'),
-                      ]),
-                      decoration: const InputDecoration(label: Text('CPF')),
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 24),
-                    TextFormField(
-                      controller: accessCodeEC,
-                      validator: Validatorless.required('Código de acesso obrigatório'),
-                      decoration: const InputDecoration(label: Text('Código de Acesso')),
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 32),
-                    SizedBox(
-                      width: screenSize.width * 0.8,
-                      height: 48,
-                      child: ElevatedButton(
-                        onPressed: () async {
-                          //TODO Implementar botão login
-                          //Ao clicar, deve-se verificar se há internet, se não houver deve vir um SnackBar dizendo que precisa de acesso,
-                          // caso haja internet entao deve bater no firestore, verificar se ha algum usuario que tenha o CPF e código de acesso digitado,
-                          //se tiver entao salva os dados no SecureStorage e entra, se não tiver entao deve vir um SnackBar dizendo que o usuário não existe
-                          //ou se a senha está incorreta.
-
-                          var auth = FirebaseAuthService();
-                          var cred = await auth.signIn(email: 'leandrocgaldino@gmail.com', password: '45789510');
-
-                          var firebase = FirebaseFirestoreService();
-                          await firebase.save(collection: 'users', document: '1', data: {'name': 'leandro', 'document': '01653915102', 'managerid': '1523', 'authid': '1'});
-                          //await service.signIn(email: 'leandrocgaldino@gmail.com', password: '45789510d');
-                        },
-                        child: const Text('ENTRAR'),
-                      ),
-                    )
-                  ],
-                ),
+      body: Stack(
+        children: [
+          Container(
+            width: screenSize.width,
+            height: screenSize.height,
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: AppTheme.gradientColor,
               ),
             ),
           ),
-        ),
+          Center(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Container(
+                    width: containerSize,
+                    height: containerSize,
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('assets/images/heart.png'),
+                      ),
+                    ),
+                  ),
+                  Text('Memento Mori', style: AppTheme.titleStyle.copyWith(color: AppTheme.secondaryColor)),
+                  const SizedBox(height: 24),
+                  Container(
+                    padding: const EdgeInsets.all(40),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      color: AppTheme.backgroudColor,
+                    ),
+                    width: screenSize.width * .8,
+                    child: Form(
+                      key: formKey,
+                      child: Column(
+                        children: [
+                          TextFormField(
+                            controller: emailEC,
+                            validator: Validatorless.multiple([
+                              Validatorless.required('E-Mail obrigatório'),
+                              Validatorless.email('E-Mail inválido'),
+                            ]),
+                            decoration: const InputDecoration(labelText: 'E-Mail'),
+                            textAlign: TextAlign.center,
+                          ),
+                          const SizedBox(height: 18),
+                          TextFormField(
+                            controller: passwordEC,
+                            validator: Validatorless.required('Senha obrigatória'),
+                            decoration: const InputDecoration(labelText: 'Senha'),
+                            textAlign: TextAlign.center,
+                          ),
+                          const SizedBox(height: 24),
+                          SizedBox(
+                            width: screenSize.width * 0.8,
+                            height: 48,
+                            child: ElevatedButton(
+                              onPressed: () async {
+                                final valid = formKey.currentState?.validate() ?? false;
+                                if (valid) {
+                                  controller.singIn(emailEC.text, passwordEC.text);
+                                }
+                              },
+                              child: const Text('Login', style: TextStyle(color: AppTheme.secondaryColor)),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
