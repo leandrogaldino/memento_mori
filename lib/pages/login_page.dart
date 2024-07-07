@@ -1,7 +1,9 @@
+import 'package:asyncstate/asyncstate.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:memento_mori/controllers/login_controller.dart';
-import 'package:memento_mori/services/firebase_auth_service.dart';
 import 'package:memento_mori/shared/app_theme.dart';
+import 'package:memento_mori/shared/extensions/extension.dart';
 import 'package:memento_mori/shared/messages.dart';
 import 'package:validatorless/validatorless.dart';
 
@@ -16,7 +18,7 @@ class _LoginPageState extends State<LoginPage> with MessageViewMixin {
   final formKey = GlobalKey<FormState>();
   final emailEC = TextEditingController();
   final passwordEC = TextEditingController();
-  final controller = LoginController();
+  final controller = GetIt.I<LoginController>();
 
   @override
   void initState() {
@@ -36,7 +38,6 @@ class _LoginPageState extends State<LoginPage> with MessageViewMixin {
     final screenSize = MediaQuery.sizeOf(context);
     final isPortrait = screenSize.height > screenSize.width;
     final containerSize = isPortrait ? screenSize.width * 0.3 : screenSize.height * 0.3;
-
     return Scaffold(
       body: Stack(
         children: [
@@ -64,7 +65,7 @@ class _LoginPageState extends State<LoginPage> with MessageViewMixin {
                       ),
                     ),
                   ),
-                  Text('Memento Mori', style: AppTheme.titleStyle.copyWith(color: AppTheme.secondaryColor)),
+                  Text('Memento Mori', style: AppTheme.appTitleStile),
                   const SizedBox(height: 24),
                   Container(
                     padding: const EdgeInsets.all(40),
@@ -87,11 +88,25 @@ class _LoginPageState extends State<LoginPage> with MessageViewMixin {
                             textAlign: TextAlign.center,
                           ),
                           const SizedBox(height: 18),
-                          TextFormField(
-                            controller: passwordEC,
-                            validator: Validatorless.required('Senha obrigatória'),
-                            decoration: const InputDecoration(labelText: 'Senha'),
-                            textAlign: TextAlign.center,
+                          ValueListenableBuilder(
+                            valueListenable: controller.obscurePassword,
+                            builder: (_, value, child) {
+                              return TextFormField(
+                                obscureText: value,
+                                controller: passwordEC,
+                                validator: Validatorless.required('Senha obrigatória'),
+                                decoration: InputDecoration(
+                                  labelText: 'Senha',
+                                  suffixIcon: IconButton(
+                                    onPressed: () {
+                                      controller.toggleObscurePassword();
+                                    },
+                                    icon: value ? const Icon(Icons.visibility) : const Icon(Icons.visibility_off),
+                                  ),
+                                ),
+                                textAlign: TextAlign.center,
+                              );
+                            },
                           ),
                           const SizedBox(height: 24),
                           SizedBox(
@@ -101,7 +116,7 @@ class _LoginPageState extends State<LoginPage> with MessageViewMixin {
                               onPressed: () async {
                                 final valid = formKey.currentState?.validate() ?? false;
                                 if (valid) {
-                                  controller.singIn(emailEC.text, passwordEC.text);
+                                  await controller.singIn(emailEC.text, passwordEC.text).withDelay(2).asyncLoader();
                                 }
                               },
                               child: const Text('Login', style: TextStyle(color: AppTheme.secondaryColor)),

@@ -66,6 +66,10 @@ cross_file
 3.3
 file:///C:/Users/leand/AppData/Local/Pub/Cache/hosted/pub.dev/cross_file-0.3.4+1/
 file:///C:/Users/leand/AppData/Local/Pub/Cache/hosted/pub.dev/cross_file-0.3.4+1/lib/
+crypto
+2.19
+file:///C:/Users/leand/AppData/Local/Pub/Cache/hosted/pub.dev/crypto-3.0.3/
+file:///C:/Users/leand/AppData/Local/Pub/Cache/hosted/pub.dev/crypto-3.0.3/lib/
 cupertino_icons
 3.1
 file:///C:/Users/leand/AppData/Local/Pub/Cache/hosted/pub.dev/cupertino_icons-1.0.8/
@@ -138,6 +142,14 @@ get_it
 3.0
 file:///C:/Users/leand/AppData/Local/Pub/Cache/hosted/pub.dev/get_it-7.7.0/
 file:///C:/Users/leand/AppData/Local/Pub/Cache/hosted/pub.dev/get_it-7.7.0/lib/
+google_fonts
+2.14
+file:///C:/Users/leand/AppData/Local/Pub/Cache/hosted/pub.dev/google_fonts-6.2.1/
+file:///C:/Users/leand/AppData/Local/Pub/Cache/hosted/pub.dev/google_fonts-6.2.1/lib/
+http
+3.3
+file:///C:/Users/leand/AppData/Local/Pub/Cache/hosted/pub.dev/http-1.2.1/
+file:///C:/Users/leand/AppData/Local/Pub/Cache/hosted/pub.dev/http-1.2.1/lib/
 http_parser
 2.12
 file:///C:/Users/leand/AppData/Local/Pub/Cache/hosted/pub.dev/http_parser-4.0.2/

@@ -55,19 +55,4 @@ mixin MessageViewMixin<T extends StatefulWidget> on State<T> {
       if (state.successMessage != null) Messages.showError(state.successMessage!, context);
     });
   }
-
-  void onErrorMessageChanged(String? message) {
-    // Implement your logic here
-    print('Error message: $message');
-  }
-
-  void onInfoMessageChanged(String? message) {
-    // Implement your logic here
-    print('Info message: $message');
-  }
-
-  void onSuccessMessageChanged(String? message) {
-    // Implement your logic here
-    print('Success message: $message');
-  }
 }

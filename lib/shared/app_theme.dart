@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 final class AppTheme {
   static const backgroudColor = Color.fromARGB(255, 240, 240, 240);
@@ -55,23 +56,35 @@ final class AppTheme {
 
   static final darkTheme = lightTheme;
 
-  static const titleStyle = TextStyle(
-    color: textColor,
-    fontSize: 32,
-    fontWeight: FontWeight.w900,
-    fontFamily: 'Raleway',
-  );
-  static const titleSmallStyle = TextStyle(
-    color: textColor,
-    fontSize: 24,
-    fontWeight: FontWeight.w900,
-    fontFamily: 'Raleway',
+  static final appTitleStile = GoogleFonts.pacifico(
+    textStyle: const TextStyle(
+      color: secondaryColor,
+      fontSize: 32,
+      fontWeight: FontWeight.w900,
+    ),
   );
 
-  static const subTitleStyle = TextStyle(
-    color: textColor,
-    fontSize: 18,
-    fontWeight: FontWeight.w500,
-    fontFamily: 'Raleway',
+  static final titleStyle = GoogleFonts.raleway(
+    textStyle: const TextStyle(
+      color: textColor,
+      fontSize: 32,
+      fontWeight: FontWeight.w900,
+    ),
+  );
+
+  static final titleSmallStyle = GoogleFonts.raleway(
+    textStyle: const TextStyle(
+      color: textColor,
+      fontSize: 24,
+      fontWeight: FontWeight.w700,
+    ),
+  );
+
+  static final subTitleStyle = GoogleFonts.raleway(
+    textStyle: const TextStyle(
+      color: textColor,
+      fontSize: 18,
+      fontWeight: FontWeight.w500,
+    ),
   );
 }

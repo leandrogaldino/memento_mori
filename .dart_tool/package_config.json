@@ -104,6 +104,12 @@
       "languageVersion": "3.3"
     },
     {
+      "name": "crypto",
+      "rootUri": "file:///C:/Users/leand/AppData/Local/Pub/Cache/hosted/pub.dev/crypto-3.0.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
+    },
+    {
       "name": "cupertino_icons",
       "rootUri": "file:///C:/Users/leand/AppData/Local/Pub/Cache/hosted/pub.dev/cupertino_icons-1.0.8",
       "packageUri": "lib/",
@@ -228,6 +234,18 @@
       "rootUri": "file:///C:/Users/leand/AppData/Local/Pub/Cache/hosted/pub.dev/get_it-7.7.0",
       "packageUri": "lib/",
       "languageVersion": "3.0"
+    },
+    {
+      "name": "google_fonts",
+      "rootUri": "file:///C:/Users/leand/AppData/Local/Pub/Cache/hosted/pub.dev/google_fonts-6.2.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
+      "name": "http",
+      "rootUri": "file:///C:/Users/leand/AppData/Local/Pub/Cache/hosted/pub.dev/http-1.2.1",
+      "packageUri": "lib/",
+      "languageVersion": "3.3"
     },
     {
       "name": "http_parser",
@@ -452,7 +470,7 @@
       "languageVersion": "3.4"
     }
   ],
-  "generated": "2024-07-06T15:46:41.154924Z",
+  "generated": "2024-07-07T16:15:57.059900Z",
   "generator": "pub",
   "generatorVersion": "3.4.3",
   "flutterRoot": "file:///D:/Desenvolvimento/Flutter",
