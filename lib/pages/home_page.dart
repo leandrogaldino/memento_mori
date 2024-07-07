@@ -16,7 +16,10 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    //TODO Iniciar a tela fazendo um _service.fetch().withDelay(2).asyncLoader()
+    //TODO ver como e feito o state
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await _service.fetch().withDelay(2).asyncLoader();
+    });
     super.initState();
   }
 
