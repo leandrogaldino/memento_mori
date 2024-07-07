@@ -2,6 +2,7 @@ import 'package:asyncstate/asyncstate.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:memento_mori/services/story_service.dart';
+import 'package:memento_mori/shared/auth/firebase_auth_service.dart';
 import 'package:memento_mori/shared/extensions/extension.dart';
 
 class HomePage extends StatefulWidget {
@@ -17,6 +18,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     //TODO ver como e feito o state
+    //TODO ver sobre a splash page, com o png que esta no asset
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await _service.fetch().withDelay(2).asyncLoader();
     });
@@ -32,7 +34,9 @@ class _HomePageState extends State<HomePage> {
           children: [
             const Text('HOME PAGE'),
             FloatingActionButton(
-              onPressed: () async {},
+              onPressed: () async {
+                await FirebaseAuthService().signOut();
+              },
               child: const Text('Sair'),
             ),
           ],

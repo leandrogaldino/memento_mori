@@ -56,14 +56,6 @@ final class AppTheme {
 
   static final darkTheme = lightTheme;
 
-  static final appTitleStile = GoogleFonts.pacifico(
-    textStyle: const TextStyle(
-      color: secondaryColor,
-      fontSize: 32,
-      fontWeight: FontWeight.w900,
-    ),
-  );
-
   static final titleStyle = GoogleFonts.raleway(
     textStyle: const TextStyle(
       color: textColor,

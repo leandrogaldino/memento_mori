@@ -36,8 +36,8 @@ class _LoginPageState extends State<LoginPage> with MessageViewMixin {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.sizeOf(context);
-    final isPortrait = screenSize.height > screenSize.width;
-    final containerSize = isPortrait ? screenSize.width * 0.3 : screenSize.height * 0.3;
+    //final isPortrait = screenSize.height > screenSize.width;
+    //final containerSize = isPortrait ? screenSize.width * 0.3 : screenSize.height * 0.3;
     return Scaffold(
       body: Stack(
         children: [
@@ -56,16 +56,16 @@ class _LoginPageState extends State<LoginPage> with MessageViewMixin {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  Container(
-                    width: containerSize,
-                    height: containerSize,
-                    decoration: const BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('assets/images/heart.png'),
-                      ),
-                    ),
-                  ),
-                  Text('Memento Mori', style: AppTheme.appTitleStile),
+                  // Container(
+                  //   width: containerSize,
+                  //   height: containerSize,
+                  //   decoration: const BoxDecoration(
+                  //     image: DecorationImage(
+                  //       image: AssetImage('assets/images/heart.png'),
+                  //     ),
+                  //   ),
+                  // ),
+                  Text('Login', style: AppTheme.titleStyle.copyWith(color: AppTheme.secondaryColor)),
                   const SizedBox(height: 24),
                   Container(
                     padding: const EdgeInsets.all(40),
@@ -119,7 +119,10 @@ class _LoginPageState extends State<LoginPage> with MessageViewMixin {
                                   await controller.singIn(emailEC.text, passwordEC.text).withDelay(2).asyncLoader();
                                 }
                               },
-                              child: const Text('Login', style: TextStyle(color: AppTheme.secondaryColor)),
+                              child: Text(
+                                'Login',
+                                style: AppTheme.subTitleStyle.copyWith(color: AppTheme.secondaryColor),
+                              ),
                             ),
                           )
                         ],
