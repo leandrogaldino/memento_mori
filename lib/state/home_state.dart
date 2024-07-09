@@ -1,6 +1,6 @@
 import '../models/story_model.dart';
 
-abstract class HomeState {}
+sealed class HomeState {}
 
 class HomeStateInitial extends HomeState {}
 
@@ -13,7 +13,7 @@ class HomeStateError extends HomeState {
 }
 
 class HomeStateSuccess extends HomeState {
-  final List<Story> stories;
+  final List<StoryModel> stories;
 
   HomeStateSuccess(this.stories);
 }

@@ -1,7 +1,8 @@
 import 'package:memento_mori/interfaces/remote_db.dart';
 import 'package:memento_mori/interfaces/service.dart';
+import 'package:memento_mori/models/story_model.dart';
 
-class StoryService implements Service {
+class StoryService implements Service<StoryModel> {
   final RemoteDB _service;
 
   StoryService({required RemoteDB service}) : _service = service;
@@ -17,13 +18,14 @@ class StoryService implements Service {
   }
 
   @override
-  Future<List<Map<String, dynamic>>> fetch({bool mark = true}) async {
+  Future<List<StoryModel>> fetch({bool mark = true}) async {
     var stories = await _service.getAll(collection: 'story', field: 'fetched', isEqualTo: false);
     if (mark) {
       for (var story in stories) {
         await markAsFetched(story['id']);
       }
     }
-    return stories;
+    List<StoryModel> storyModels = stories.map((e) => StoryModel.fromMap(e)).toList();
+    return storyModels;
   }
 }
