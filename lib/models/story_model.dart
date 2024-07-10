@@ -31,7 +31,7 @@ class StoryModel {
 
   factory StoryModel.fromMap(Map<String, dynamic> map) {
     Timestamp dateTimestamp = map['date'] ?? Timestamp.now();
-    DateTime date = dateTimestamp.toDate(); // Converte o Timestamp para DateTime
+    DateTime date = dateTimestamp.toDate();
     return StoryModel(
       id: (map['id'] ?? '') as String,
       category: (map['category'] ?? '') as String,
