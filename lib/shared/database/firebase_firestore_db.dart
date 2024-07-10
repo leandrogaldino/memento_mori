@@ -11,6 +11,7 @@ class FirebaseFirestoreService implements RemoteDB {
       var map = querySnapshot.docs.map((doc) {
         Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
         data['id'] = doc.id;
+
         return data;
       }).toList();
 

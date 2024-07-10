@@ -49,10 +49,10 @@ mixin MessageViewMixin<T extends StatefulWidget> on State<T> {
       if (state.errorMessage != null) Messages.showError(state.errorMessage!, context);
     });
     state._infoMessage.addListener(() {
-      if (state.infoMessage != null) Messages.showError(state.infoMessage!, context);
+      if (state.infoMessage != null) Messages.showInfo(state.infoMessage!, context);
     });
     state._successMessage.addListener(() {
-      if (state.successMessage != null) Messages.showError(state.successMessage!, context);
+      if (state.successMessage != null) Messages.showSuccess(state.successMessage!, context);
     });
   }
 }

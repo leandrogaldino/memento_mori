@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class StoryModel {
   final String id;
   final String category;
@@ -28,10 +30,12 @@ class StoryModel {
   }
 
   factory StoryModel.fromMap(Map<String, dynamic> map) {
+    Timestamp dateTimestamp = map['date'] ?? Timestamp.now();
+    DateTime date = dateTimestamp.toDate(); // Converte o Timestamp para DateTime
     return StoryModel(
       id: (map['id'] ?? '') as String,
       category: (map['category'] ?? '') as String,
-      date: DateTime.fromMillisecondsSinceEpoch((map['date'] ?? 0) as int),
+      date: date,
       title: (map['title'] ?? '') as String,
       imagePath: (map['imagePath'] ?? '') as String,
       body: (map['body'] ?? '') as String,

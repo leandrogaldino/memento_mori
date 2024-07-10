@@ -1,12 +1,11 @@
-import 'package:asyncstate/asyncstate.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:memento_mori/controllers/home_controller.dart';
+import 'package:memento_mori/models/story_model.dart';
 import 'package:memento_mori/services/story_service.dart';
 import 'package:memento_mori/shared/database/firebase_firestore_db.dart';
-import 'package:memento_mori/shared/extensions/extension.dart';
 import 'package:memento_mori/shared/messages.dart';
 import 'package:memento_mori/state/home_state.dart';
+import 'package:asyncstate/asyncstate.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,13 +14,12 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with MessageViewMixin {
   final controller = HomeController(service: StoryService(service: FirebaseFirestoreService()));
 
   @override
   void initState() {
-    //TODO ver como e feito o state
-    //TODO ver sobre a splash page, com o png que esta no asset
+    messageListener(controller);
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await controller.getStories().asyncLoader();
     });
@@ -37,10 +35,17 @@ class _HomePageState extends State<HomePage> {
         Widget body = Container();
         if (state is HomeStateError) {
           body = const Text('ERRO');
-          Messages.showError(state.errorMessage, context);
         } else if (state is HomeStateSuccess) {
-          Messages.showSuccess('Dados carregados com sucesso', context);
-          body = const Text('CARREGADO');
+          List<StoryModel> stories = state.stories;
+
+          body = ListView.builder(
+              itemCount: stories.length,
+              itemBuilder: (context, index) {
+                final StoryModel story = stories[index];
+                return ListTile(
+                  title: Text(story.title),
+                );
+              });
         }
 
         return Scaffold(body: body);

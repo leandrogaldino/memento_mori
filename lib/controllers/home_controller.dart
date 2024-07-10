@@ -1,21 +1,23 @@
-import 'package:asyncstate/asyncstate.dart';
 import 'package:flutter/material.dart';
 import 'package:memento_mori/services/story_service.dart';
+import 'package:memento_mori/shared/messages.dart';
 import 'package:memento_mori/state/home_state.dart';
 
-class HomeController extends ChangeNotifier {
+class HomeController extends ChangeNotifier with MessageStateMixin {
   final StoryService _service;
   HomeState state = HomeStateInitial();
 
   HomeController({required StoryService service}) : _service = service;
 
-  getStories() async {
+  Future<void> getStories() async {
     try {
-      final stories = await _service.fetch().asyncLoader();
+      final stories = await _service.fetch(mark: false);
       state = HomeStateSuccess(stories);
       notifyListeners();
     } on Exception catch (e) {
       state = HomeStateError(e.toString());
+      notifyListeners();
+      showError('Erro ao carregar');
     }
   }
 }

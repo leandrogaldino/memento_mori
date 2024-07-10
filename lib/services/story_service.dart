@@ -19,7 +19,7 @@ class StoryService implements Service<StoryModel> {
 
   @override
   Future<List<StoryModel>> fetch({bool mark = true}) async {
-    var stories = await _service.getAll(collection: 'story', field: 'fetched', isEqualTo: false);
+    var stories = await _service.getAll(collection: 'stories', field: 'fetched', isEqualTo: false);
     if (mark) {
       for (var story in stories) {
         await markAsFetched(story['id']);

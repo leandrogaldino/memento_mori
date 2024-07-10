@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:memento_mori/controllers/login_controller.dart';
 import 'package:memento_mori/shared/app_theme.dart';
-import 'package:memento_mori/shared/extensions/extension.dart';
 import 'package:memento_mori/shared/messages.dart';
 import 'package:validatorless/validatorless.dart';
 
@@ -116,7 +115,7 @@ class _LoginPageState extends State<LoginPage> with MessageViewMixin {
                               onPressed: () async {
                                 final valid = formKey.currentState?.validate() ?? false;
                                 if (valid) {
-                                  await controller.singIn(emailEC.text, passwordEC.text).withDelay(2).asyncLoader();
+                                  await controller.singIn(emailEC.text, passwordEC.text).asyncLoader();
                                 }
                               },
                               child: Text(
