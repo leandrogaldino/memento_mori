@@ -20,4 +20,8 @@ class HomeController extends ChangeNotifier with MessageStateMixin {
       showError('Erro ao carregar');
     }
   }
+
+  String getCategoryImagePath(String category) {
+    return _service.getCategoryImagePath(category);
+  }
 }

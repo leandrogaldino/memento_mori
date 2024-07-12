@@ -28,4 +28,21 @@ class StoryService implements Service<StoryModel> {
     List<StoryModel> storyModels = stories.map((e) => StoryModel.fromMap(e)).toList();
     return storyModels;
   }
+
+  String getCategoryImagePath(String category) {
+    switch (category) {
+      case 'Raiva':
+        return 'assets/images/angry.png';
+      case 'Ansiedade':
+        return 'assets/images/anxiety.png';
+      case 'Alegria':
+        return 'assets/images/happy.png';
+      case 'Amor':
+        return 'assets/images/love.png';
+      case 'Tristeza':
+        return 'assets/images/sad.png';
+      default:
+        return '';
+    }
+  }
 }

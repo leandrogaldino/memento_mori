@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class StoryModel {
@@ -7,13 +6,12 @@ class StoryModel {
   final String category;
   final DateTime date;
   final String title;
-  final String imagePath;
   final String body;
   final bool readed;
   final bool favorite;
   final String comment;
 
-  StoryModel({required this.id, required this.category, required this.date, required this.title, required this.imagePath, required this.body, required this.readed, required this.favorite, required this.comment});
+  StoryModel({required this.id, required this.category, required this.date, required this.title, required this.body, required this.readed, required this.favorite, required this.comment});
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -21,7 +19,6 @@ class StoryModel {
       'category': category,
       'date': date.millisecondsSinceEpoch,
       'title': title,
-      'imagePath': imagePath,
       'body': body,
       'readed': readed,
       'favorite': favorite,
@@ -37,7 +34,6 @@ class StoryModel {
       category: (map['category'] ?? '') as String,
       date: date,
       title: (map['title'] ?? '') as String,
-      imagePath: (map['imagePath'] ?? '') as String,
       body: (map['body'] ?? '') as String,
       readed: (map['readed'] ?? false) as bool,
       favorite: (map['favorite'] ?? false) as bool,
