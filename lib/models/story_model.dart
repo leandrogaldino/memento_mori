@@ -44,4 +44,26 @@ class StoryModel {
   String toJson() => json.encode(toMap());
 
   factory StoryModel.fromJson(String source) => StoryModel.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  StoryModel copyWith({
+    String? id,
+    String? category,
+    DateTime? date,
+    String? title,
+    String? body,
+    bool? readed,
+    bool? favorite,
+    String? comment,
+  }) {
+    return StoryModel(
+      id: id ?? this.id,
+      category: category ?? this.category,
+      date: date ?? this.date,
+      title: title ?? this.title,
+      body: body ?? this.body,
+      readed: readed ?? this.readed,
+      favorite: favorite ?? this.favorite,
+      comment: comment ?? this.comment,
+    );
+  }
 }

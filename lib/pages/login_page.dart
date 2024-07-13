@@ -55,15 +55,6 @@ class _LoginPageState extends State<LoginPage> with MessageViewMixin {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  // Container(
-                  //   width: containerSize,
-                  //   height: containerSize,
-                  //   decoration: const BoxDecoration(
-                  //     image: DecorationImage(
-                  //       image: AssetImage('assets/images/heart.png'),
-                  //     ),
-                  //   ),
-                  // ),
                   Text('Login', style: AppTheme.titleStyle.copyWith(color: AppTheme.secondaryColor)),
                   const SizedBox(height: 24),
                   Container(

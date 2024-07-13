@@ -39,6 +39,15 @@ final class AppTheme {
       errorBorder: _errorInputBorder,
       focusedErrorBorder: _errorInputBorder,
     ),
+    segmentedButtonTheme: SegmentedButtonThemeData(
+      style: SegmentedButton.styleFrom(
+        foregroundColor: textColor,
+        backgroundColor: backgroudColor,
+        side: const BorderSide(style: BorderStyle.none),
+        selectedForegroundColor: primaryColor,
+        textStyle: subTitleStyle.copyWith(fontSize: 16),
+      ),
+    ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
           foregroundColor: textColor,
@@ -61,14 +70,6 @@ final class AppTheme {
       color: textColor,
       fontSize: 32,
       fontWeight: FontWeight.w900,
-    ),
-  );
-
-  static final titleSmallStyle = GoogleFonts.raleway(
-    textStyle: const TextStyle(
-      color: textColor,
-      fontSize: 24,
-      fontWeight: FontWeight.w700,
     ),
   );
 

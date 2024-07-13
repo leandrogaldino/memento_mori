@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:memento_mori/app.dart';
+import 'package:get_it/get_it.dart';
 import 'package:memento_mori/controllers/home_controller.dart';
 import 'package:memento_mori/models/story_model.dart';
-import 'package:memento_mori/services/story_service.dart';
 import 'package:memento_mori/shared/app_theme.dart';
-import 'package:memento_mori/shared/database/firebase_firestore_db.dart';
 import 'package:memento_mori/shared/extensions/date_time_extension.dart';
 import 'package:memento_mori/shared/messages.dart';
 import 'package:memento_mori/state/home_state.dart';
@@ -18,8 +16,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with MessageViewMixin {
-  final controller = HomeController(service: StoryService(service: FirebaseFirestoreService()));
-  Set<String> segmentSelected = {'A'};
+  final controller = GetIt.I<HomeController>();
 
   @override
   void initState() {
@@ -38,35 +35,45 @@ class _HomePageState extends State<HomePage> with MessageViewMixin {
         final state = controller.state;
         Widget body = Container();
         if (state is HomeStateError) {
-          body = const Text('ERRO');
+          body = const Center(child: Text('ERRO'));
         } else if (state is HomeStateSuccess) {
           List<StoryModel> stories = state.stories;
-
           body = Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(
-                height: 30,
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
                 child: SegmentedButton<String>(
                   segments: const [
                     ButtonSegment(
-                      value: 'A',
-                      label: Text('A'),
+                      value: 'happy',
+                      label: Text('Alegria'),
                     ),
                     ButtonSegment(
-                      value: 'B',
-                      label: Text('B'),
+                      value: 'love',
+                      label: Text('Amor'),
                     ),
                     ButtonSegment(
-                      value: 'C',
-                      label: Text('C'),
+                      value: 'anxiety',
+                      label: Text('Ansiedade'),
+                    ),
+                    ButtonSegment(
+                      value: 'angry',
+                      label: Text('Raiva'),
+                    ),
+                    ButtonSegment(
+                      value: 'sad',
+                      label: Text('Tristeza'),
+                    ),
+                    ButtonSegment(
+                      value: 'favorites',
+                      label: Text('Favoritos'),
                     ),
                   ],
                   emptySelectionAllowed: true,
-                  selected: segmentSelected,
+                  selected: controller.segmentSelected,
                   onSelectionChanged: (selected) {
-                    segmentSelected = selected;
-                    setState(() {});
+                    controller.updateSegment(selected);
                   },
                 ),
               ),
@@ -78,8 +85,8 @@ class _HomePageState extends State<HomePage> with MessageViewMixin {
                     return Container(
                       margin: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
                       decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey[300]!), // Define a cor da borda
-                        borderRadius: BorderRadius.circular(8.0), // Opcional: bordas arredondadas
+                        border: Border.all(color: Colors.grey[300]!),
+                        borderRadius: BorderRadius.circular(8.0),
                       ),
                       child: ListTile(
                         tileColor: AppTheme.secondaryColor,
@@ -99,7 +106,7 @@ class _HomePageState extends State<HomePage> with MessageViewMixin {
                               icon: story.favorite
                                   ? const Icon(
                                       Icons.favorite,
-                                      color: Colors.red,
+                                      color: AppTheme.primaryColor,
                                     )
                                   : const Icon(
                                       Icons.favorite_border,
@@ -122,9 +129,29 @@ class _HomePageState extends State<HomePage> with MessageViewMixin {
 
         return Scaffold(
             appBar: AppBar(
-              title: const Text('Memento Mori'),
+              title: RichText(
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: 'Silent',
+                      style: AppTheme.titleStyle,
+                    ),
+                    TextSpan(
+                      text: 'Pen',
+                      style: AppTheme.titleStyle.copyWith(color: AppTheme.primaryColor),
+                    ),
+                    const WidgetSpan(
+                      child: Icon(
+                        Icons.create,
+                        size: 38,
+                        color: AppTheme.textColor,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
               centerTitle: true,
-              backgroundColor: Colors.blue, // Cor de fundo da appbar
+              backgroundColor: AppTheme.backgroudColor, // Cor de fundo da appbar
               elevation: 4, // Sombra da appbar
               actions: <Widget>[
                 IconButton(

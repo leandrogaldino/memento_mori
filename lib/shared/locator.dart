@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:memento_mori/controllers/home_controller.dart';
 import 'package:memento_mori/controllers/login_controller.dart';
 import 'package:memento_mori/interfaces/auth.dart';
 import 'package:memento_mori/interfaces/remote_db.dart';
@@ -18,5 +19,6 @@ class Locator {
     getIt.registerLazySingleton<Storage>(() => const SecureStorageService());
     getIt.registerFactory<LoginController>(() => LoginController(service: getIt<Auth>()));
     getIt.registerFactory<StoryService>(() => StoryService(service: getIt<RemoteDB>()));
+    getIt.registerFactory<HomeController>(() => HomeController(service: getIt<StoryService>()));
   }
 }
