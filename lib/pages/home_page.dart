@@ -1,8 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:memento_mori/controllers/home_controller.dart';
 import 'package:memento_mori/models/story_model.dart';
 import 'package:memento_mori/shared/app_theme.dart';
+import 'package:memento_mori/shared/database/firebase_firestore_db.dart';
+import 'package:memento_mori/shared/database/hive_db.dart';
 import 'package:memento_mori/shared/extensions/date_time_extension.dart';
 import 'package:memento_mori/shared/messages.dart';
 import 'package:memento_mori/state/home_state.dart';
@@ -153,12 +157,23 @@ class _HomePageState extends State<HomePage> with MessageViewMixin {
               centerTitle: true,
               backgroundColor: AppTheme.backgroudColor, // Cor de fundo da appbar
               elevation: 4, // Sombra da appbar
-              actions: <Widget>[
-                IconButton(
-                  icon: const Icon(Icons.settings),
-                  onPressed: () {
-                    // Implementar ação de configurações aqui
-                  },
+              actions: [
+                PopupMenuButton(
+                  icon: const Icon(Icons.more_vert),
+                  itemBuilder: (_) => [
+                    PopupMenuItem(
+                      child: ListTile(
+                        leading: const Icon(Icons.brightness_7),
+                        title: const Text('Claro'),
+                        onTap: () async {
+                          var db = FirebaseFirestoreDB();
+                          var ldb = HiveDB();
+                          var a = await db.getStoriesGreaterThan(id: ldb.lastId());
+                          log(a.toString());
+                        },
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),

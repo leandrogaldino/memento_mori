@@ -31,7 +31,7 @@ class HomeController extends ChangeNotifier with MessageStateMixin {
 
   Future<void> getStories() async {
     try {
-      _allStories = await _service.fetch(mark: false);
+      _allStories = await _service.fetch();
       _stories = _allStories;
       state = HomeStateSuccess(_stories);
       notifyListeners();

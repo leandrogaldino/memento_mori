@@ -1,31 +1,44 @@
+import 'package:memento_mori/interfaces/local_db.dart';
 import 'package:memento_mori/interfaces/remote_db.dart';
 import 'package:memento_mori/interfaces/service.dart';
 import 'package:memento_mori/models/story_model.dart';
 
 class StoryService implements Service<StoryModel> {
-  final RemoteDB _service;
+  final RemoteDB _remoteDB;
+  final LocalDB _localDB;
 
-  StoryService({required RemoteDB service}) : _service = service;
-
-  @override
-  Future<void> markAsFetched(String id) async {
-    await _service.update(collection: 'stories', documentid: id, field: 'fetched', value: true);
-  }
+  StoryService({required RemoteDB remoteDB, required LocalDB localDB})
+      : _remoteDB = remoteDB,
+        _localDB = localDB;
 
   @override
   Future<void> sendComment(String id, String comment) async {
-    await _service.update(collection: 'stories', documentid: id, field: 'comment', value: comment);
+    //TODO verificar se esse save esta salvando o comentario corretamente
+    await _localDB.save(id, {'comment': comment});
+    await _remoteDB.update(collection: 'stories', documentid: id, field: 'comment', value: comment);
   }
 
+//TODO Fazer testes nesse fetch
   @override
-  Future<List<StoryModel>> fetch({bool mark = true}) async {
-    var stories = await _service.getAll(collection: 'stories', field: 'fetched', isEqualTo: false);
-    if (mark) {
-      for (var story in stories) {
-        await markAsFetched(story['id']);
-      }
+  Future<List<StoryModel>> fetch() async {
+    int lastId = _localDB.lastId();
+    final remoteStories = await _remoteDB.getStoriesGreaterThan(id: lastId);
+    final localStories = await _localDB.getAll();
+
+    List<Map<dynamic, dynamic>> allStories = [];
+    allStories.addAll(localStories);
+    allStories.addAll(remoteStories);
+
+    allStories.sort((a, b) {
+      int idA = a['id'];
+      int idB = b['id'];
+      return idB.compareTo(idA); // Ordena em ordem decrescente
+    });
+
+    List<StoryModel> storyModels = remoteStories.map((e) => StoryModel.fromMap(e)).toList();
+    for (var story in storyModels) {
+      _localDB.save(story.id, story.toMap());
     }
-    List<StoryModel> storyModels = stories.map((e) => StoryModel.fromMap(e)).toList();
     return storyModels;
   }
 
