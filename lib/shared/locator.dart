@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
-import 'package:memento_mori/controllers/home_controller.dart';
-import 'package:memento_mori/controllers/login_controller.dart';
+import 'package:memento_mori/pages/home/home_controller.dart';
+
+import 'package:memento_mori/pages/login/login_controller.dart';
 import 'package:memento_mori/interfaces/auth.dart';
 import 'package:memento_mori/interfaces/local_db.dart';
 import 'package:memento_mori/interfaces/remote_db.dart';

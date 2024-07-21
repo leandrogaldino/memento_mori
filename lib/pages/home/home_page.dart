@@ -2,14 +2,14 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:memento_mori/controllers/home_controller.dart';
+import 'package:memento_mori/pages/home/home_controller.dart';
 import 'package:memento_mori/models/story_model.dart';
 import 'package:memento_mori/shared/app_theme.dart';
 import 'package:memento_mori/shared/database/firebase_firestore_db.dart';
 import 'package:memento_mori/shared/database/hive_db.dart';
 import 'package:memento_mori/shared/extensions/date_time_extension.dart';
 import 'package:memento_mori/shared/messages.dart';
-import 'package:memento_mori/state/home_state.dart';
+import 'package:memento_mori/pages/home/home_state.dart';
 import 'package:asyncstate/asyncstate.dart';
 
 class HomePage extends StatefulWidget {

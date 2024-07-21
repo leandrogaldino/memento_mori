@@ -1,7 +1,7 @@
 import 'package:asyncstate/asyncstate.dart';
 import 'package:flutter/material.dart';
-import 'package:memento_mori/pages/home_page.dart';
-import 'package:memento_mori/pages/login_page.dart';
+import 'package:memento_mori/pages/home/home_page.dart';
+import 'package:memento_mori/pages/login/login_page.dart';
 import 'package:memento_mori/shared/app_theme.dart';
 import 'package:memento_mori/shared/auth/auth_state_listener.dart';
 import 'package:memento_mori/shared/loader.dart';
