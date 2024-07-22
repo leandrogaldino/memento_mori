@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:memento_mori/models/story_model.dart';
 import 'package:memento_mori/services/story_service.dart';
 import 'package:memento_mori/shared/messages.dart';
-import 'package:memento_mori/pages/home/home_state.dart';
+import 'package:memento_mori/states/home_state.dart';
 
 class HomeController extends ChangeNotifier with MessageStateMixin {
   final StoryService _service;

@@ -1,4 +1,4 @@
-import '../../models/story_model.dart';
+import '../models/story_model.dart';
 
 sealed class HomeState {}
 

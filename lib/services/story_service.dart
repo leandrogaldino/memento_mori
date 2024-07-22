@@ -29,11 +29,7 @@ class StoryService implements Service<StoryModel> {
     allStories.addAll(localStories);
     allStories.addAll(remoteStories);
 
-    allStories.sort((a, b) {
-      int idA = a['id'];
-      int idB = b['id'];
-      return idB.compareTo(idA); // Ordena em ordem decrescente
-    });
+    allStories.sort((a, b) => b['id'].compareTo(a['id']));
 
     List<StoryModel> storyModels = remoteStories.map((e) => StoryModel.fromMap(e)).toList();
     for (var story in storyModels) {

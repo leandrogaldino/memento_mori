@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:memento_mori/interfaces/auth.dart';
 import 'package:memento_mori/shared/exceptions/auth_exception.dart';
 
-class FirebaseAuthService implements Auth {
+class AuthService implements Auth {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override

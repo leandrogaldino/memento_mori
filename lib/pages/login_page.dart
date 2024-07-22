@@ -1,7 +1,7 @@
 import 'package:asyncstate/asyncstate.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:memento_mori/pages/login/login_controller.dart';
+import 'package:memento_mori/controllers/login_controller.dart';
 import 'package:memento_mori/shared/app_theme.dart';
 import 'package:memento_mori/shared/messages.dart';
 import 'package:validatorless/validatorless.dart';

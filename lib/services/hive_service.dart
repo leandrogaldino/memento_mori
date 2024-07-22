@@ -3,7 +3,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:memento_mori/interfaces/local_db.dart';
 import 'package:path_provider/path_provider.dart';
 
-class HiveDB implements LocalDB {
+class HiveService implements LocalDB {
   static late Box _box;
   static init() async {
     Directory dir = await getApplicationDocumentsDirectory();
@@ -21,10 +21,12 @@ class HiveDB implements LocalDB {
     return id;
   }
 
+  //precisa retornar list<map<string, dynamic>>
   @override
   Future<List<Map<dynamic, dynamic>>> getAll() async {
     final allValues = _box.toMap().values.toList();
     final filteredValues = allValues.whereType<Map<dynamic, dynamic>>().toList();
+
     return filteredValues;
   }
 

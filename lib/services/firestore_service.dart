@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:memento_mori/interfaces/remote_db.dart';
 
-class FirebaseFirestoreDB implements RemoteDB {
+class FirestoreService implements RemoteDB {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
   @override
