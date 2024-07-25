@@ -21,10 +21,10 @@ class HiveService implements LocalDB {
     return id;
   }
 
-  //precisa retornar list<map<string, dynamic>>
+  //TODO precisa retornar list<map<string, dynamic>>
   @override
   Future<List<Map<dynamic, dynamic>>> getAll() async {
-    final allValues = _box.toMap().values.toList();
+    final allValues = _box.toMap().values.cast();
     final filteredValues = allValues.whereType<Map<dynamic, dynamic>>().toList();
 
     return filteredValues;
