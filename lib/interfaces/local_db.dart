@@ -1,13 +1,6 @@
 abstract class LocalDB {
-  Future<List<Map<dynamic, dynamic>>> getAll();
-
-  Future<List<Map<dynamic, dynamic>>> getByCategory(String category);
-
-  Future<List<Map<dynamic, dynamic>>> getFavorites();
-
-  Future<void> save(String key, Map<String, dynamic> value);
-
-  Future<void> delete(String key);
-
-  int lastId();
+  Future<int> getLastId({required String table});
+  Future<void> delete(String table, {String? where, List<Object?>? whereArgs});
+  Future<int> save(String table, Map<String, Object?> values);
+  Future<List<Map<String, Object?>>> get(String table, {List<String>? columns, String? where, List<Object?>? whereArgs, String? orderBy});
 }

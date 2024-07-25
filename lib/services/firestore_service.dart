@@ -5,9 +5,9 @@ class FirestoreService implements RemoteDB {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
   @override
-  Future<List<Map<String, dynamic>>> getStoriesGreaterThan({required int id}) async {
+  Future<List<Map<String, dynamic>>> getAll({required String collection, int? fromId}) async {
     try {
-      QuerySnapshot querySnapshot = await _db.collection('stories').orderBy(FieldPath.documentId).startAfter([id.toString()]).get();
+      QuerySnapshot querySnapshot = await _db.collection(collection).orderBy(FieldPath.documentId).startAfter([fromId == null ? 1 : fromId.toString()]).get();
       var map = querySnapshot.docs.map((doc) {
         Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
         data['id'] = doc.id;
@@ -20,7 +20,7 @@ class FirestoreService implements RemoteDB {
   }
 
   @override
-  Future<void> update({required String collection, required String documentid, required String field, required value}) async {
-    await _db.collection(collection).doc(documentid).update({field: value});
+  Future<void> update({required String collection, required String documentId, required String field, required value}) async {
+    await _db.collection(collection).doc(documentId).update({field: value});
   }
 }

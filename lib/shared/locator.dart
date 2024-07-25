@@ -10,7 +10,6 @@ import 'package:memento_mori/services/auth_service.dart';
 import 'package:memento_mori/services/firestore_service.dart';
 import 'package:memento_mori/shared/Storage/secure_storage_service.dart';
 import 'package:memento_mori/services/story_service.dart';
-import 'package:memento_mori/services/hive_service.dart';
 
 class Locator {
   Locator._();
@@ -19,7 +18,6 @@ class Locator {
   static void setup() {
     getIt.registerLazySingleton<Auth>(() => AuthService());
     getIt.registerLazySingleton<RemoteDB>(() => FirestoreService());
-    getIt.registerLazySingleton<LocalDB>(() => HiveService());
     getIt.registerLazySingleton<Storage>(() => const SecureStorageService());
     getIt.registerFactory<LoginController>(() => LoginController(service: getIt<Auth>()));
     getIt.registerFactory<StoryService>(() => StoryService(remoteDB: getIt<RemoteDB>(), localDB: getIt<LocalDB>()));

@@ -168,7 +168,7 @@ class _HomePageState extends State<HomePage> with MessageViewMixin {
                         onTap: () async {
                           var db = FirestoreService();
                           var ldb = HiveService();
-                          var a = await db.getStoriesGreaterThan(id: ldb.lastId());
+                          var a = await db.getAll(fromId: ldb.lastId());
                           log(a.toString());
                         },
                       ),
