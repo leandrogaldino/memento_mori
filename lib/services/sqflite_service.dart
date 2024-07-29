@@ -34,7 +34,7 @@ class SqfliteService implements LocalDB {
   }
 
   @override
-  Future<List<Map<String, Object?>>> get(String table, {List<String>? columns, String? where, List<Object?>? whereArgs, String? orderBy}) async {
+  Future<List<Map<String, Object?>>> get({required String table, List<String>? columns, String? where, List<Object?>? whereArgs, String? orderBy}) async {
     return await _database.query(table, columns: columns, where: where, whereArgs: whereArgs, orderBy: orderBy);
   }
 
@@ -50,6 +50,16 @@ class SqfliteService implements LocalDB {
     await db.execute(_storiesCreateTable);
   }
 
-//TODO criar estrutura do banco;
-  static String get _storiesCreateTable => '';
+  static String get _storiesCreateTable => '''
+  CREATE TABLE stories (
+      id INTEGER PRIMARY KEY,
+      category TEXT,
+      date DATE,
+      title TEXT,
+      body TEXT,
+      readed INTEGER,
+      favorite INTEGER,
+      comment TEXT
+  );
+  ''';
 }

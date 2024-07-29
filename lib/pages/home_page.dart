@@ -1,12 +1,8 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:memento_mori/controllers/home_controller.dart';
 import 'package:memento_mori/models/story_model.dart';
 import 'package:memento_mori/shared/app_theme.dart';
-import 'package:memento_mori/services/firestore_service.dart';
-import 'package:memento_mori/services/hive_service.dart';
 import 'package:memento_mori/shared/extensions/date_time_extension.dart';
 import 'package:memento_mori/shared/messages.dart';
 import 'package:memento_mori/states/home_state.dart';
@@ -166,10 +162,10 @@ class _HomePageState extends State<HomePage> with MessageViewMixin {
                         leading: const Icon(Icons.brightness_7),
                         title: const Text('Claro'),
                         onTap: () async {
-                          var db = FirestoreService();
-                          var ldb = HiveService();
-                          var a = await db.getAll(fromId: ldb.lastId());
-                          log(a.toString());
+                          //var db = FirestoreService();
+                          //var ldb = HiveService();
+                          //var a = await db.getAll(fromId: ldb.lastId());
+                          //log(a.toString());
                         },
                       ),
                     ),

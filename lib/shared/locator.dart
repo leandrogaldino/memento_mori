@@ -8,6 +8,7 @@ import 'package:memento_mori/interfaces/remote_db.dart';
 import 'package:memento_mori/interfaces/storage.dart';
 import 'package:memento_mori/services/auth_service.dart';
 import 'package:memento_mori/services/firestore_service.dart';
+import 'package:memento_mori/services/sqflite_service.dart';
 import 'package:memento_mori/shared/Storage/secure_storage_service.dart';
 import 'package:memento_mori/services/story_service.dart';
 
@@ -17,6 +18,7 @@ class Locator {
 
   static void setup() {
     getIt.registerLazySingleton<Auth>(() => AuthService());
+    getIt.registerLazySingleton<LocalDB>(() => SqfliteService.instance);
     getIt.registerLazySingleton<RemoteDB>(() => FirestoreService());
     getIt.registerLazySingleton<Storage>(() => const SecureStorageService());
     getIt.registerFactory<LoginController>(() => LoginController(service: getIt<Auth>()));

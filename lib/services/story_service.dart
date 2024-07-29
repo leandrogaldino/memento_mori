@@ -15,20 +15,20 @@ class StoryService {
   }
 
   Future<List<StoryModel>> fetch() async {
-    int lastId = _localDB.lastId();
+    int lastId = await _localDB.getLastId(table: 'stories');
     final remoteStories = await _remoteDB.getAll(collection: 'stories', fromId: lastId);
-    final localStories = await _localDB.getAll();
 
-    List<Map<dynamic, dynamic>> allStories = [];
-    allStories.addAll(localStories);
-    allStories.addAll(remoteStories);
-
-    allStories.sort((a, b) => b['id'].compareTo(a['id']));
-
-    List<StoryModel> storyModels = remoteStories.map((e) => StoryModel.fromMap(e)).toList();
-    for (var story in storyModels) {
-      _localDB.save(story.id, story.toMap());
+    for (var story in remoteStories) {
+      await _localDB.save('stories', story);
     }
+
+    final localStories = await _localDB.get(table: 'stories', orderBy: 'id DESC');
+
+    List<StoryModel> storyModels = localStories.map((e) => StoryModel.fromMap(e)).toList();
+    for (var story in storyModels) {
+      _localDB.save('stories', story.toMap());
+    }
+
     return storyModels;
   }
 
